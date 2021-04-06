@@ -84,18 +84,6 @@ class Logoutview(View):
         logout(request)
         return redirect("/home/")
 
-
-
-
-
-
-
-
-
-
-
-
-
 @method_decorator(login_required, name = 'dispatch')
 class Detailsview(ListView):
     model= Register
