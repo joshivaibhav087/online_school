@@ -43,8 +43,8 @@
             </div>
           </nav>
           <h1 style="text-align: center;">Students List</h1>
-<table class="table">
-    <thead>
+<table class="table table-bordered">
+    <thead class="table-dark">
       <tr>
         <th scope="col">sl.no</th>
         <th scope="col">Student</th>
@@ -52,9 +52,9 @@
         <th scope="col">age</th>
         <th scope="col">gender</th>
         <th scope="col">class</th>
-        <th scope="col">status</th>
-       
-      </tr>
+        <th scope="col" class="text-center">status</th>
+        <th scope="col">Remove</th>
+       </tr>
     </thead>
     <tbody>
     {% for b in object_list %}
@@ -66,10 +66,11 @@
         <td>{{b.gender}}</td>
         <td>{{b.class1}}</td>
         {% if not b.approve %}
-        <td><a href="{% url 'account:approve' b.pk %}" class="btn btn-success">Approve</a></td>
+        <td class="text-center"><a href="{% url 'account:approve' b.pk %}" class="btn btn-success">Approve</a></td>
         {% else %}
-        <td><a href="{% url 'account:unapprove' b.pk %}" class="btn btn-warning">Unapprove</a></td>
-        {% endif %}
+        <td class="text-center"><a href="{% url 'account:unapprove' b.pk %}" class="btn btn-warning">Unapprove</a></td>
+        {% endif %} 
+        <td class="text-center"><a href="{% url 'account:delete' b.pk %}" class="btn btn-danger">Delete</a></td>
       </tr>
 {% endfor %}
     </tbody>

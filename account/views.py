@@ -64,16 +64,13 @@ class Loginview(View):
         user = authenticate(username = self.request.POST['username'], password = self.request.POST['password'])
         if user is not None:
             login(self.request,user)
-            messages.success(self.request, 'logged-in successfully')
             if self.request.user.is_superuser:
+                messages.success(self.request, 'logged-in as admin')
                 return redirect("/details/")
 
-            if self.request.user.is_active:
-                return redirect("/classroom/")
-
             else:
-                messages.warning(self.request,'you are not yet approved please wait for approval')
-                return redirect("/login/")
+                messages.success(self.request,"logged-in as student")
+                return redirect("/classroom/")
         else:
             messages.warning(self.request, 'invalid credentials')
             return redirect("/login/")
@@ -108,6 +105,11 @@ class Detailsview(ListView):
         user = self.request.user
         context["object_list"] = Register.objects.all()
         return context
+
+def delete(request,pk):
+    if request.user.is_superuser:
+        form = Register.objects.get(id=pk).delete()
+        return redirect("/details/")
 
 def approve(request, pk):
     if request.user.is_superuser:
