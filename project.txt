@@ -1,0 +1,6 @@
+1.this project is for students for online learning platform where student can register and learn.
+2. first student needs to register if he/she is new to the application with all the details.
+3. after registration he needs to be approved by the admin for logging in.
+4. when admin approves the user request using the username and password student can register and learn.
+5. admin can approve and unapprove user and can also delete the account of user.
+6 admin can add the lesson which will reflect into the students dashboard when he/she loggs-in.

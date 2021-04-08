@@ -69,7 +69,7 @@ class Loginview(View):
                 return redirect("/details/")
 
             else:
-                messages.success(self.request,"logged-in as student")
+                # messages.success(self.request,"logged-in as student")
                 return redirect("/classroom/")
         else:
             messages.warning(self.request, 'invalid credentials')
@@ -82,6 +82,7 @@ class Loginview(View):
 class Logoutview(View):
     def get(self,request):
         logout(request)
+        messages.success(self.request,"logged-out successfully")
         return redirect("/home/")
 
 @method_decorator(login_required, name = 'dispatch')

@@ -10,6 +10,7 @@ class Admin(models.Model):
     chapter = models.CharField(max_length=20)
     video = EmbedVideoField()
     notes = models.TextField()
+    approved =models.BooleanField(default=False)
 
     def __str__ (self):
         return str(self.subject)

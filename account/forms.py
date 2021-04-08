@@ -15,6 +15,9 @@ class ProfileForm(forms.ModelForm):
         fields = ['phone_no','age','id_proof','gender','class1']
 
 class LoginForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
     class Meta:
         model = User
+
         fields = ['username','password']

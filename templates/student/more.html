@@ -50,7 +50,7 @@
           {% video object.video '800x600' %}
           <input type="hidden" name="next" value="{{ request.path }}">
 
-          <p class="card-text">notes :{{ object.notes }}</p>
+          <p class="card-text">notes :{{ object.notes|truncatechars:200 }}</p>
           <a href="{% url 'teacher:classroom' %}" class="btn btn-primary">back to index</a>
         </div>
         </div>

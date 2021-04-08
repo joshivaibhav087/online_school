@@ -8,6 +8,8 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 from .forms import AddForm
 from django.views.generic import ListView, DetailView
+from account.models import Register
+
 # Create your views here.
 
 class Addview(View):
@@ -33,16 +35,28 @@ class Addview(View):
         form = AddForm()
         return render(self.request, "admin/add.html", {'form':form})
         
-class Classview(ListView):
+# class Classview(ListView):
+#     model = Admin
+#     template_name = "student/student.html"
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["object_list"] = Admin.objects.all()
+#         return context
+class Classview(View):
     model = Admin
     template_name = "student/student.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = self.request.user
-        context["object_list"] = Admin.objects.all()
-        return context
-
+    def get(self, *args, **kwargs):
+        try:
+            register = Register.objects.get(approve=True, user=self.request.user)
+            if register:
+                object_list= Admin.objects.all()
+                return render(self.request, 'student/student.html',{'object_list':object_list})
+        except:
+            messages.warning(self.request, "please wait for approval")
+            return redirect("/login/")
+            
 class Dview(DetailView):
     model = Admin
     template_name = "student/more.html"  
